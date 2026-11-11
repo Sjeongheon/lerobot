@@ -8,7 +8,7 @@ the raw packets.
 
 The symptom is not particular to this arm. Before this investigation, at least three other SO-101
 arms had shown the same thing, a joint driving off at its first goal after a calibration, and the
-cause was not identified at the time. Those earlier cases were not recorded at the packet level
+cause was not identified at the time; the earliest record dates from 2026-10-17. Those earlier cases were not recorded at the packet level
 and are not part of this branch; the arm here is the first one where the count was measured.
 
 The branch follows the order of events: the experiments, then the three commits of the fix
