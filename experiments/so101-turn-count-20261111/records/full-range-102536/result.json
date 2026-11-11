@@ -1,0 +1,147 @@
+{
+  "target": 867,
+  "speed": 60,
+  "powered_attempted": true,
+  "reached": false,
+  "torque_before": {
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0,
+    "6": 0
+  },
+  "before": {
+    "phase": 12,
+    "lock": 1,
+    "torque": 0,
+    "home": -1772,
+    "minimum": 867,
+    "maximum": 3261,
+    "goal": 2085,
+    "present": 2031,
+    "private67": 2031,
+    "private71": 0,
+    "raw_hex": "030a000903020000016303bd0c465028e8030c2c2f20200010000101f40101ec0e0014c8500ac8c8001e250800002003e803000000000001ef07000000003418000000ef07000000000000000000ffff01143201443201"
+  },
+  "original_velocity": 800,
+  "before_reset": {
+    "label": "before_reset",
+    "time_ns": 1794360337375699800,
+    "phase": 28,
+    "lock": 0,
+    "torque": 0,
+    "home": -1772,
+    "minimum": 867,
+    "maximum": 3261,
+    "goal": 2085,
+    "present": 2031,
+    "private67": 2031,
+    "private71": 0,
+    "raw_hex": "030a000903020000016303bd0c465028e8031c2c2f20200010000101f40101ec0e0014c8500ac8c8001e250800002003e803000000000000ef07000000003418000000ef07000000000000000000ffff01143201443201",
+    "speed": 0,
+    "load": 0,
+    "current_raw": 0,
+    "status": 0
+  },
+  "reset_acknowledged": true,
+  "hold_targets": {
+    "1": 1869,
+    "3": 784,
+    "4": 825,
+    "5": 791
+  },
+  "hold_originals": {
+    "1": {
+      "phase": 12,
+      "lock": 1,
+      "torque": 0,
+      "home": 1812,
+      "minimum": 576,
+      "maximum": 3296,
+      "goal": 1873,
+      "present": 1869,
+      "private67": 1869,
+      "private71": 0,
+      "raw_hex": "030a000903010000014002e00c465028e8030c2c2f20200010000101f4010114070014c8500ac8c8001e510700002003e8030000000000014d070000000034180000004d07000000000000000000ffff01143201443201"
+    },
+    "3": {
+      "phase": 12,
+      "lock": 1,
+      "torque": 0,
+      "home": -1219,
+      "minimum": 684,
+      "maximum": 2903,
+      "goal": 2897,
+      "present": 784,
+      "private67": 784,
+      "private71": 0,
+      "raw_hex": "030a00090303000001ac02570b465028e8030c2c2f20200010000101f40101c30c0014c8500ac8c8001e510b00002003e80300000000000110030000000034170000001003000000000000000000ffff01143201443201"
+    },
+    "4": {
+      "phase": 12,
+      "lock": 1,
+      "torque": 0,
+      "home": 1415,
+      "minimum": 812,
+      "maximum": 3157,
+      "goal": 825,
+      "present": 825,
+      "private67": 825,
+      "private71": 0,
+      "raw_hex": "030a000903040000012c03550c465028e8030c2c2f20200010000101f4010187050014c8500ac8c8001e390300002003e80300000000000139030000000034180000003903000000000000000000ffff01143201443201"
+    },
+    "5": {
+      "phase": 12,
+      "lock": 1,
+      "torque": 0,
+      "home": 1438,
+      "minimum": 0,
+      "maximum": 4095,
+      "goal": 791,
+      "present": 791,
+      "private67": 791,
+      "private71": 0,
+      "raw_hex": "030a000903050000010000ff0f465028e8030c2c2f20200010000101f401019e050014c8500ac8c8001e170300002003e80300000000000117030000000034180000001703000000000000000000ffff01143201443201"
+    }
+  },
+  "planned_targets": [
+    867,
+    3261,
+    867
+  ],
+  "endpoints": [],
+  "target_observation_seconds": 3.0,
+  "error": "RuntimeError: Motor 2 status error: 32",
+  "off_last_error": "Motor 2 status error: 32",
+  "off_confirmed": true,
+  "holding_off": {
+    "1": true,
+    "3": true,
+    "4": true,
+    "5": true
+  },
+  "after": {
+    "phase": 12,
+    "lock": 1,
+    "torque": 0,
+    "home": -1772,
+    "minimum": 867,
+    "maximum": 3261,
+    "goal": 1779,
+    "present": 2051,
+    "private67": 2051,
+    "private71": 0,
+    "raw_hex": "030a000903020000016303bd0c465028e8030c2c2f20200010000101f40101ec0e0014c8500ac8c8001ef30600002003e80300000000000103080000000034190000000308000000000000000000ffff01143201443201"
+  },
+  "static_restored": true,
+  "torque_after": {
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0,
+    "6": 0
+  },
+  "cleanup_errors": []
+}

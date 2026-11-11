@@ -1,0 +1,67 @@
+{
+  "range-lower-interior-v2": {
+    "target": 917,
+    "reached": true,
+    "error": null,
+    "powered_position_range": [
+      874,
+      912
+    ],
+    "max_goal_error_ticks": 11,
+    "max_abs_load_raw": 88,
+    "off_confirmed": true,
+    "static_restored": true,
+    "torque_after": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0
+    }
+  },
+  "range-upper-interior": {
+    "target": 3211,
+    "reached": false,
+    "error": "TimeoutError: No status response from ID 2",
+    "powered_position_range": [
+      912,
+      1191
+    ],
+    "max_goal_error_ticks": 11,
+    "max_abs_load_raw": 84,
+    "off_confirmed": true,
+    "static_restored": true,
+    "torque_after": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0
+    }
+  },
+  "range-upper-interior-v2": {
+    "target": 3211,
+    "reached": false,
+    "error": "RuntimeError: Position stalled",
+    "powered_position_range": [
+      1202,
+      1366
+    ],
+    "max_goal_error_ticks": 22,
+    "max_abs_load_raw": 184,
+    "off_confirmed": true,
+    "static_restored": true,
+    "torque_after": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0
+    }
+  },
+  "onsite_observation": "Operator reported cable/mechanism/hand-support interference at the stopped pose; exact cause not yet differentiated. Resume only after clearance.",
+  "full_range_complete": false
+}
