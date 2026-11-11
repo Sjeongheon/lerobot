@@ -1,0 +1,111 @@
+{
+  "port": "COM21",
+  "joint": "shoulder_lift",
+  "stages": [
+    {
+      "time_ns": 1794374703244260900,
+      "stage": "before",
+      "torque": 0,
+      "phase": 12,
+      "lock": 0,
+      "home": -1772,
+      "minimum": 867,
+      "maximum": 3261,
+      "present": 1147
+    },
+    {
+      "time_ns": 1794374703585225600,
+      "stage": "extended_before",
+      "torque": 0,
+      "phase": 28,
+      "lock": 0,
+      "home": -1772,
+      "minimum": 867,
+      "maximum": 3261,
+      "present": 1147
+    },
+    {
+      "time_ns": 1794374704002153500,
+      "stage": "home_zero",
+      "torque": 0,
+      "phase": 12,
+      "lock": 0,
+      "home": 0,
+      "minimum": 0,
+      "maximum": 4095,
+      "present": 3472
+    },
+    {
+      "time_ns": 1794374704203704500,
+      "stage": "awaiting_middle",
+      "torque": 0,
+      "phase": 12,
+      "lock": 0,
+      "home": 0,
+      "minimum": 0,
+      "maximum": 4095,
+      "present": 3472
+    },
+    {
+      "time_ns": 1794375604963402200,
+      "stage": "restored",
+      "torque": 0,
+      "phase": 12,
+      "lock": 0,
+      "home": -1772,
+      "minimum": 867,
+      "maximum": 3261,
+      "present": 1148
+    },
+    {
+      "time_ns": 1794375605389402600,
+      "stage": "extended_restored",
+      "torque": 0,
+      "phase": 28,
+      "lock": 0,
+      "home": -1772,
+      "minimum": 867,
+      "maximum": 3261,
+      "present": 1148
+    }
+  ],
+  "torque_before": {
+    "shoulder_pan": 0,
+    "shoulder_lift": 0,
+    "elbow_flex": 0,
+    "wrist_flex": 0,
+    "wrist_roll": 0,
+    "gripper": 0
+  },
+  "original_calibration": {
+    "id": 2,
+    "drive_mode": 0,
+    "homing_offset": -1772,
+    "range_min": 867,
+    "range_max": 3261
+  },
+  "stage": "finished",
+  "extended_before": 1147,
+  "error": "TimeoutError: Operator timeout in awaiting_middle",
+  "restored": {
+    "time_ns": 1794375604963402200,
+    "stage": "restored",
+    "torque": 0,
+    "phase": 12,
+    "lock": 0,
+    "home": -1772,
+    "minimum": 867,
+    "maximum": 3261,
+    "present": 1148
+  },
+  "extended_restored": 1148,
+  "torque_after": {
+    "shoulder_pan": 0,
+    "shoulder_lift": 0,
+    "elbow_flex": 0,
+    "wrist_flex": 0,
+    "wrist_roll": 0,
+    "gripper": 0
+  },
+  "cleanup_errors": []
+}
