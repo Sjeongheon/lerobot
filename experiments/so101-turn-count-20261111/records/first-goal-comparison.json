@@ -1,0 +1,176 @@
+{
+  "hold-normal": {
+    "start_display": 2070,
+    "start_extended": 2070,
+    "old_goal": 887,
+    "command_goal": 2069,
+    "powered_position_range": [
+      2070,
+      2070
+    ],
+    "last_powered_position": 2070,
+    "powered_net_ticks": 0,
+    "powered_net_degrees": 0.0,
+    "last_powered_private67": 2069,
+    "private71_range": [
+      0,
+      0
+    ],
+    "final_off_position": 2070,
+    "goal_to_off_request_s": 0.3511762,
+    "goal_to_off_confirmation_s": 0.375,
+    "stop_reason": "time_limit",
+    "all_rx_status_errors_zero": true,
+    "all_powered_goal_readbacks_match": true,
+    "writes": [
+      {
+        "id": 2,
+        "address": 55,
+        "data": "00"
+      },
+      {
+        "id": 2,
+        "address": 18,
+        "data": "1c"
+      },
+      {
+        "id": 2,
+        "address": 18,
+        "data": "0c"
+      },
+      {
+        "id": 2,
+        "address": 42,
+        "data": "1508"
+      },
+      {
+        "id": 2,
+        "address": 40,
+        "data": "01"
+      },
+      {
+        "id": 2,
+        "address": 40,
+        "data": "00"
+      },
+      {
+        "id": 2,
+        "address": 18,
+        "data": "1c"
+      },
+      {
+        "id": 2,
+        "address": 18,
+        "data": "0c"
+      },
+      {
+        "id": 2,
+        "address": 55,
+        "data": "01"
+      }
+    ],
+    "opcode_counts": {
+      "2": 39,
+      "3": 9
+    },
+    "static_restored": true,
+    "torque_after": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0
+    }
+  },
+  "hold-retained-turn": {
+    "start_display": 2073,
+    "start_extended": 6169,
+    "old_goal": 2069,
+    "command_goal": 2069,
+    "powered_position_range": [
+      2039,
+      2073
+    ],
+    "last_powered_position": 2039,
+    "powered_net_ticks": -34,
+    "powered_net_degrees": -2.98828125,
+    "last_powered_private67": 1980,
+    "private71_range": [
+      -800,
+      -200
+    ],
+    "final_off_position": 1996,
+    "goal_to_off_request_s": 0.2159409,
+    "goal_to_off_confirmation_s": 0.25,
+    "stop_reason": "displacement_limit",
+    "all_rx_status_errors_zero": true,
+    "all_powered_goal_readbacks_match": true,
+    "writes": [
+      {
+        "id": 2,
+        "address": 55,
+        "data": "00"
+      },
+      {
+        "id": 2,
+        "address": 18,
+        "data": "1c"
+      },
+      {
+        "id": 2,
+        "address": 18,
+        "data": "0c"
+      },
+      {
+        "id": 2,
+        "address": 42,
+        "data": "1508"
+      },
+      {
+        "id": 2,
+        "address": 40,
+        "data": "01"
+      },
+      {
+        "id": 2,
+        "address": 40,
+        "data": "00"
+      },
+      {
+        "id": 2,
+        "address": 18,
+        "data": "1c"
+      },
+      {
+        "id": 2,
+        "address": 18,
+        "data": "0c"
+      },
+      {
+        "id": 2,
+        "address": 55,
+        "data": "01"
+      }
+    ],
+    "opcode_counts": {
+      "2": 37,
+      "3": 9,
+      "10": 1
+    },
+    "static_restored": true,
+    "torque_after": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0
+    }
+  },
+  "comparison": {
+    "configuration_bytes_0_through_41_identical": true,
+    "start_pose_difference_ticks": 3,
+    "limits": "One normal and one retained-turn trial; no complete calibration cycle; host stop threshold is not a hard physical motion limit; OFF drift is separate from powered motion; private67/71 semantics inferred; no powered recovery retest"
+  }
+}

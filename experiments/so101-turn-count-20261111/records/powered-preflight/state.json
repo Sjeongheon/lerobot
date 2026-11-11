@@ -1,0 +1,27 @@
+{
+  "phase": 12,
+  "lock": 1,
+  "torque": 0,
+  "home": -1772,
+  "minimum": 867,
+  "maximum": 3261,
+  "goal": 887,
+  "present": 2069,
+  "private67": 2069,
+  "private71": 0,
+  "raw_hex": "030a000903020000016303bd0c465028e8030c2c2f20200010000101f40101ec0e0014c8500ac8c8001e770300002003e80300000000000115080000000034170000001508000000000000000000ffff01143201443201",
+  "torque_all": {
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0,
+    "6": 0
+  },
+  "acceleration": 30,
+  "goal_time": 0,
+  "goal_velocity": 800,
+  "torque_limit": 1000,
+  "temperature": 23,
+  "status": 0
+}
