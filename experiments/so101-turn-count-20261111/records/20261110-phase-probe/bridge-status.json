@@ -1,0 +1,42 @@
+﻿{
+    "device":  "follower",
+    "port_open":  true,
+    "controller_connected":  false,
+    "write_registers":  [
+                            "Goal_Position",
+                            "Torque_Enable"
+                        ],
+    "positions":  [
+                      1825,
+                      873,
+                      2895,
+                      2758,
+                      791,
+                      2063
+                  ],
+    "valid":  [
+                  true,
+                  true,
+                  true,
+                  true,
+                  true,
+                  true
+              ],
+    "events":  [
+                   {
+                       "device_id":  "follower",
+                       "time_monotonic_ns":  291553271081626,
+                       "outcome":  "rejected_or_io_error",
+                       "source_id":  "f1c68583d933477c81112cf0ee9f7f25",
+                       "error":  "Register is not writable in the runtime profile",
+                       "request_hex":  "ffff0204033700bf"
+                   },
+                   {
+                       "device_id":  "follower",
+                       "time_monotonic_ns":  291553273538165,
+                       "outcome":  "source_disconnected",
+                       "source_id":  "f1c68583d933477c81112cf0ee9f7f25",
+                       "automatic_motor_commands_sent":  false
+                   }
+               ]
+}
