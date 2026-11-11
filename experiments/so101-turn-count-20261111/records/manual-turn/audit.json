@@ -1,0 +1,79 @@
+{
+  "sample_count": 449,
+  "id2_all_sampled_torque_off": true,
+  "all_sampled_goals": [
+    887
+  ],
+  "opcode_counts": {
+    "2": 479,
+    "3": 6,
+    "10": 1
+  },
+  "writes": [
+    {
+      "id": 2,
+      "address": 55,
+      "data_hex": "00"
+    },
+    {
+      "id": 2,
+      "address": 18,
+      "data_hex": "1c"
+    },
+    {
+      "id": 2,
+      "address": 31,
+      "data_hex": "0000"
+    },
+    {
+      "id": 2,
+      "address": 31,
+      "data_hex": "ec0e"
+    },
+    {
+      "id": 2,
+      "address": 18,
+      "data_hex": "0c"
+    },
+    {
+      "id": 2,
+      "address": 55,
+      "data_hex": "01"
+    }
+  ],
+  "boundary_crossings": [
+    {
+      "from": 4094,
+      "to": 4191
+    }
+  ],
+  "manual_net_ticks": 1196,
+  "manual_net_degrees": 105.1171875,
+  "last_before_reset": {
+    "present": 6165,
+    "private67": 6165,
+    "home": -1772,
+    "goal": 887,
+    "torque": 0
+  },
+  "post_reset_position_range": [
+    2069,
+    2070
+  ],
+  "post_reset_private67_range": [
+    2069,
+    2070
+  ],
+  "modulo_4096_before_reset": 2069,
+  "preserved_registers": true,
+  "torque_after": {
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0,
+    "6": 0
+  },
+  "cleanup_errors": [],
+  "limits": "Torque-OFF coordinate experiment; no powered first-goal response or full calibration cycle tested"
+}
