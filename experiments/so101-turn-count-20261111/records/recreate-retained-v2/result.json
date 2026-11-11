@@ -1,0 +1,81 @@
+{
+  "port": "COM21",
+  "stages": [
+    {
+      "time_ns": 1794359670939742600,
+      "stage": "original_home_extended",
+      "phase": 28,
+      "lock": 0,
+      "torque": 0,
+      "home": -1772,
+      "minimum": 867,
+      "maximum": 3261,
+      "goal": 917,
+      "present": 877,
+      "private67": 877,
+      "private71": 0,
+      "raw_hex": "030a000903020000016303bd0c465028e8031c2c2f20200010000101f40101ec0e0014c8500ac8c8001e950300002003e8030000000000006d030000000034180000006d03000000000000000000ffff01143201443201"
+    },
+    {
+      "time_ns": 1794359671106291100,
+      "stage": "awaiting_manual_move",
+      "phase": 28,
+      "lock": 0,
+      "torque": 0,
+      "home": 0,
+      "minimum": 867,
+      "maximum": 3261,
+      "goal": 917,
+      "present": 3201,
+      "private67": 3201,
+      "private71": 0,
+      "raw_hex": "030a000903020000016303bd0c465028e8031c2c2f20200010000101f4010100000014c8500ac8c8001e950300002003e803000000000000810c18da00003418000000810c000000000000000000ffff01143201443201"
+    }
+  ],
+  "reset_sent": false,
+  "torque_before": {
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0,
+    "6": 0
+  },
+  "before": {
+    "phase": 12,
+    "lock": 1,
+    "torque": 0,
+    "home": -1772,
+    "minimum": 867,
+    "maximum": 3261,
+    "goal": 917,
+    "present": 877,
+    "private67": 877,
+    "private71": 0,
+    "raw_hex": "030a000903020000016303bd0c465028e8030c2c2f20200010000101f40101ec0e0014c8500ac8c8001e950300002003e8030000000000016d030000000034180000006d03000000000000000000ffff01143201443201"
+  },
+  "stage": "finished",
+  "after": {
+    "phase": 12,
+    "lock": 1,
+    "torque": 0,
+    "home": -1772,
+    "minimum": 867,
+    "maximum": 3261,
+    "goal": 917,
+    "present": 877,
+    "private67": 877,
+    "private71": 0,
+    "raw_hex": "030a000903020000016303bd0c465028e8030c2c2f20200010000101f40101ec0e0014c8500ac8c8001e950300002003e8030000000000016d030000000034180000006d03000000000000000000ffff01143201443201"
+  },
+  "preserved_registers": true,
+  "torque_after": {
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0,
+    "6": 0
+  },
+  "cleanup_errors": []
+}

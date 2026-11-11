@@ -1,0 +1,113 @@
+{
+  "scope": "Python coordinate port of supplied reference; actual host Home calculation; not firmware or hardware validation",
+  "host_sha256": "456e0888c95b57e1d7b5acb0ca07bd78a89471ee1d4cc474f0e7f0b882d88bdd",
+  "reference_entry": "so101-motor-analysis-20261106/project/reports/register-calibration-review-20261105/continued-investigation/calibration-turn-replay/calibration_turn_replay.c",
+  "reference_sha256": "4a5f606aab7c363bd9ab68eebec8a43b03dd218077ea996f0d32a37503cbeeda",
+  "cases": [
+    {
+      "joint": "shoulder_lift",
+      "condition": "middle_start",
+      "manual_motion_degrees": 0.0,
+      "home": -1772,
+      "turns_before_home": 0,
+      "middle_full": 2047,
+      "range_samples": 6452,
+      "final_display": 876,
+      "final_full": 876,
+      "first_same_pose_goal": 876,
+      "profile_target_minus_integrator": 0
+    },
+    {
+      "joint": "shoulder_lift",
+      "condition": "cross_boundary",
+      "manual_motion_degrees": 103.711,
+      "home": -1772,
+      "turns_before_home": 1,
+      "middle_full": 6143,
+      "range_samples": 6452,
+      "final_display": 876,
+      "final_full": 4972,
+      "first_same_pose_goal": 876,
+      "profile_target_minus_integrator": -4096
+    },
+    {
+      "joint": "shoulder_lift",
+      "condition": "upper_start",
+      "manual_motion_degrees": -106.699,
+      "home": -1772,
+      "turns_before_home": 0,
+      "middle_full": 2047,
+      "range_samples": 6452,
+      "final_display": 876,
+      "final_full": 876,
+      "first_same_pose_goal": 876,
+      "profile_target_minus_integrator": 0
+    },
+    {
+      "joint": "shoulder_lift",
+      "condition": "saved_home_at_boot",
+      "manual_motion_degrees": 103.711,
+      "home": -1772,
+      "turns_before_home": 0,
+      "middle_full": 2047,
+      "range_samples": 6452,
+      "final_display": 876,
+      "final_full": 876,
+      "first_same_pose_goal": 876,
+      "profile_target_minus_integrator": 0
+    },
+    {
+      "joint": "elbow_flex",
+      "condition": "middle_start",
+      "manual_motion_degrees": 0.0,
+      "home": -1219,
+      "turns_before_home": 0,
+      "middle_full": 2047,
+      "range_samples": 6452,
+      "final_display": 2894,
+      "final_full": 2894,
+      "first_same_pose_goal": 2894,
+      "profile_target_minus_integrator": 0
+    },
+    {
+      "joint": "elbow_flex",
+      "condition": "cross_boundary",
+      "manual_motion_degrees": 119.795,
+      "home": -1219,
+      "turns_before_home": 1,
+      "middle_full": 6143,
+      "range_samples": 6452,
+      "final_display": 2894,
+      "final_full": 6990,
+      "first_same_pose_goal": 2894,
+      "profile_target_minus_integrator": -4096
+    },
+    {
+      "joint": "elbow_flex",
+      "condition": "upper_start",
+      "manual_motion_degrees": -75.234,
+      "home": -1219,
+      "turns_before_home": 0,
+      "middle_full": 2047,
+      "range_samples": 6452,
+      "final_display": 2894,
+      "final_full": 2894,
+      "first_same_pose_goal": 2894,
+      "profile_target_minus_integrator": 0
+    },
+    {
+      "joint": "elbow_flex",
+      "condition": "saved_home_at_boot",
+      "manual_motion_degrees": 119.795,
+      "home": -1219,
+      "turns_before_home": 0,
+      "middle_full": 2047,
+      "range_samples": 6452,
+      "final_display": 2894,
+      "final_full": 2894,
+      "first_same_pose_goal": 2894,
+      "profile_target_minus_integrator": 0
+    }
+  ],
+  "assertions_passed": true
+}

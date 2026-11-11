@@ -1,0 +1,84 @@
+{
+  "source_sha256": "fc0875d8c4ff98f302ac7ac0313703b47b2aa28c9f9a9f3afe2692366f7bae2c",
+  "scope": "ID2 torque-OFF calibration core via current source methods and a serial adapter.\n\nNo Goal, torque ON, RESET, or calibration-file writes. This does not exercise\nrustypot transport, robot.connect/configure, or the complete robot CLI.\nCreate command.json containing {\"command\":\"finish\"} after the manual sweep.\n",
+  "torque_before": {
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0,
+    "6": 0
+  },
+  "before": {
+    "phase": 12,
+    "lock": 1,
+    "torque": 0,
+    "home": -1772,
+    "minimum": 867,
+    "maximum": 3261,
+    "goal": 1779,
+    "present": 1978,
+    "private67": 1978,
+    "private71": 0,
+    "raw_hex": "030a000903020000016303bd0c465028e8030c2c2f20200010000101f40101ec0e0014c8500ac8c8001ef30600002003e803000000000001ba07000000003418000000ba07000000000000000000ffff01143201443201"
+  },
+  "extended_before": {
+    "stage": "extended_before",
+    "time_ns": 1794360789499977700,
+    "phase": 28,
+    "lock": 0,
+    "torque": 0,
+    "home": -1772,
+    "minimum": 867,
+    "maximum": 3261,
+    "goal": 1779,
+    "present": 1978,
+    "private67": 1978,
+    "private71": 0,
+    "raw_hex": "030a000903020000016303bd0c465028e8031c2c2f20200010000101f40101ec0e0014c8500ac8c8001ef30600002003e803000000000000ba07000000003418000000ba07000000000000000000ffff01143201443201"
+  },
+  "homes": {
+    "shoulder": -1841
+  },
+  "extended_after_homing": {
+    "stage": "extended_after_homing",
+    "time_ns": 1794360790156054900,
+    "phase": 28,
+    "lock": 0,
+    "torque": 0,
+    "home": -1841,
+    "minimum": 0,
+    "maximum": 4095,
+    "goal": 1779,
+    "present": 2047,
+    "private67": 2047,
+    "private71": 0,
+    "raw_hex": "030a000903020000010000ff0f465028e8031c2c2f20200010000101f40101310f0014c8500ac8c8001ef30600002003e803000000000000ff07000000003418000000ff07000000000000000000ffff01143201443201"
+  },
+  "stage": "finished",
+  "error": "TimeoutError: Manual range timeout; restoring original calibration",
+  "after_restore": {
+    "stage": "after_restore",
+    "time_ns": 1794360970892760600,
+    "phase": 12,
+    "lock": 1,
+    "torque": 0,
+    "home": -1772,
+    "minimum": 867,
+    "maximum": 3261,
+    "goal": 1779,
+    "present": 1873,
+    "private67": 1873,
+    "private71": 0,
+    "raw_hex": "030a000903020000016303bd0c465028e8030c2c2f20200010000101f40101ec0e0014c8500ac8c8001ef30600002003e8030000000000015107fa80000034180000005107000000000000000000ffff01143201443201"
+  },
+  "torque_after": {
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0,
+    "6": 0
+  },
+  "cleanup_errors": []
+}
