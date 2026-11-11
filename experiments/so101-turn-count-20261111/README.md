@@ -6,6 +6,11 @@ shoulder_lift motor (ID 2, STS3215, firmware 3.10), on 2026-11-11 unless noted. 
 is needed to run LeRobot; the branch exists so the numbers in the issue can be checked against
 the raw packets.
 
+The symptom is not particular to this arm. Before this investigation, at least three other SO-101
+arms had shown the same thing, a joint driving off at its first goal after a calibration, and the
+cause was not identified at the time. Those earlier cases were not recorded at the packet level
+and are not part of this branch; the arm here is the first one where the count was measured.
+
 The branch follows the order of events: the experiments, then the three commits of the fix
 branch (`fix/feetech-turn-count-reset`, the same commits as its PR), then B02, which ran
 `write_calibration()` with the fix in place. There is no other code change.
@@ -105,7 +110,8 @@ checked.
 
 ## Limits
 
-- One arm, one joint, one firmware version. Private registers 67 and 71 were recorded as
+- The measurements are from one arm, one joint and one firmware version; the earlier arms that
+  showed the symptom were not measured this way. Private registers 67 and 71 were recorded as
   indicators only.
 - The two readings of a position (bit clear, bit set) are consecutive reads, not simultaneous.
 - Powered movement is measured between torque-on samples; sag after torque off is excluded.
