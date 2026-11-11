@@ -354,6 +354,88 @@ def test_write_calibration_notes_when_read_back_after_write_failure_fails(dummy_
     assert bus.calibration == {}
 
 
+def test_write_calibration_zeroes_the_turn_count_once_every_motor_is_verified(
+    dummy_motors, dummy_calibration
+):
+    """A joint moved by hand through the encoder's zero during the calibration leaves the
+    STS3215 counting a turn: the RESET instruction goes out after the registers are checked,
+    with the torque read first."""
+    bus = make_bus(dummy_motors)
+    events = []
+    write_register = bus._bus.write_register_with_error
+    read_register = bus._bus.read_register_with_error
+    sync_read = bus._bus.sync_read_register_with_error
+    reset = bus._bus.reset_turn_count
+
+    def record(name, call):
+        def recorded(*args, **kwargs):
+            events.append(name)
+            return call(*args, **kwargs)
+
+        return recorded
+
+    with (
+        patch.object(bus._bus, "write_register_with_error", side_effect=record("write", write_register)),
+        patch.object(bus._bus, "read_register_with_error", side_effect=record("read", read_register)),
+        patch.object(bus._bus, "sync_read_register_with_error", side_effect=record("torque", sync_read)),
+        patch.object(bus._bus, "reset_turn_count", side_effect=record("reset", reset)),
+    ):
+        bus.write_calibration(dummy_calibration)
+
+    assert events == ["write"] * 3 + ["read"] * 3 + ["write"] * 3 + ["read"] * 3 + ["write"] * 3 + [
+        "read"
+    ] * 3 + ["torque", "reset"]
+    assert bus._bus.sync_reads == [([1, 2, 3], "torque_enable")]
+    assert bus._bus.turn_resets == [([1, 2, 3], 0)]
+    assert bus.calibration == dummy_calibration
+
+
+def test_write_calibration_refuses_to_zero_a_turn_count_with_the_torque_on(dummy_motors, dummy_calibration):
+    bus = make_bus(dummy_motors)
+    seed(bus, "Torque_Enable", 2, 1)
+
+    with pytest.raises(RuntimeError, match=r"dummy_2.*torque is on"):
+        bus.write_calibration(dummy_calibration)
+
+    assert bus._bus.turn_resets == []
+    assert bus.calibration == {}
+
+
+def test_a_turn_count_reset_that_fails_fails_the_calibration(dummy_motors, dummy_calibration):
+    previous_calibration = dummy_calibration.copy()
+    bus = make_bus(dummy_motors, previous_calibration)
+
+    with (
+        patch.object(bus._bus, "reset_turn_count", return_value={2: "Timeout error"}),
+        pytest.raises(ConnectionError, match=r"dummy_2.*Timeout error"),
+    ):
+        bus.write_calibration(dummy_calibration)
+
+    assert bus.calibration is previous_calibration
+
+
+def test_only_the_feetech_sts_motors_get_their_turn_count_zeroed():
+    """A Dynamixel has no such instruction, nor a turn count in position mode: it is left out
+    of the reset, and refused when asked for by name."""
+    motors = {
+        "sts": Motor(1, "sts3215", MotorNormMode.RANGE_M100_100),
+        "xl": Motor(2, "xl330-m288", MotorNormMode.RANGE_M100_100),
+    }
+    bus = make_bus(motors)
+    calibration = {
+        motor: MotorCalibration(id=m.id, drive_mode=0, homing_offset=0, range_min=100, range_max=4000)
+        for motor, m in motors.items()
+    }
+
+    bus.write_calibration(calibration)
+
+    assert bus._bus.turn_resets == [([1], 0)]
+    assert bus.reset_turn_count() == ["sts"]
+    with pytest.raises(ValueError, match=r"\['xl'\] have no instruction"):
+        bus.reset_turn_count("xl")
+    assert bus._bus.turn_resets == [([1], 0), ([1], 0)]
+
+
 def test_a_drive_mode_kept_in_software_does_not_count(dummy_motors, dummy_calibration):
     """A Feetech has no Drive_Mode register: the drive mode lives in the calibration alone."""
     calibration = {**dummy_calibration}

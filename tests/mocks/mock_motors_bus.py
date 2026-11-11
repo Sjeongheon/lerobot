@@ -41,6 +41,7 @@ class DummyDefinition:
         homing_offset_sign: int | None = None,
         supports_broadcast_ping: bool = False,
         eeprom_lock: bool = False,
+        supports_turn_count_reset: bool = False,
     ):
         self.name = name
         self.models = models
@@ -53,6 +54,7 @@ class DummyDefinition:
         self.homing_offset_sign = homing_offset_sign
         self.supports_broadcast_ping = supports_broadcast_ping
         self.eeprom_lock = eeprom_lock
+        self.supports_turn_count_reset = supports_turn_count_reset
 
     def register(self, name: str) -> SimpleNamespace | None:
         """Like rustypot's `RegisterInfo`, of a register that is not sign-magnitude."""
@@ -143,6 +145,7 @@ class MockBus:
         self.scans: list[Definition] = []  # the definition each sweep read model numbers with
         self.broadcast_scans: list[Definition] = []  # the definition each broadcast scan read them with
         self.torques: list[tuple[list[int], bool, int]] = []  # (ids, enabled, retries)
+        self.turn_resets: list[tuple[list[int], int]] = []  # (ids, retries) of each reset_turn_count
         # (operation, definition, motor id, new id or baud rate) of each change_id / change_baudrate, in order
         self.setups: list[tuple[str, Definition, int, int]] = []
 
@@ -226,6 +229,21 @@ class MockBus:
                 failed[motor_id] = "Timeout error"
             else:
                 self.seed(motor_id, "torque_enable", int(enabled))
+        return failed
+
+    def reset_turn_count(self, motor_ids: list[int], retries: int = 0) -> dict[int, str]:
+        """Like rustypot: every motor tried, the ones that failed returned with why."""
+        self.turn_resets.append((list(motor_ids), retries))
+        failed = {}
+        for motor_id in motor_ids:
+            if motor_id not in self.motors:
+                failed[motor_id] = f"no motor with id {motor_id} on this bus"
+            elif not self.motors[motor_id].supports_turn_count_reset:
+                failed[motor_id] = (
+                    f"{self.motors[motor_id].name} has no instruction that resets its turn count"
+                )
+            elif motor_id in self.absent:
+                failed[motor_id] = "Timeout error"
         return failed
 
     def change_id(self, definition: Definition, motor_id: int, new_id: int) -> None:
