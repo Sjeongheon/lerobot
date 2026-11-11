@@ -705,6 +705,59 @@ class SerialMotorsBus(MotorsBusBase):
             self.enable_torque(motors)
 
     @check_if_not_connected
+    def reset_turn_count(
+        self, motors: NameOrID | Sequence[NameOrID] | None = None, num_retry: int = 0
+    ) -> list[str]:
+        """Zero the turn count of the selected Feetech motors, with their torque off.
+
+        A Feetech STS servo keeps counting the turns it is moved through past its encoder's
+        zero, torque on or off. A joint moved by hand through that point, as during a
+        calibration, then reports its position a whole turn away from its limits, and once
+        its torque is on it drives that whole turn to reach a goal within them. The RESET
+        instruction of the Feetech protocol zeroes the count and keeps every register, as a
+        power cycle does. [`~SerialMotorsBus.write_calibration`] sends it once the
+        calibration is written.
+
+        Args:
+            motors (`str | int | Sequence[str | int]`, *optional*):
+                Motors to reset, by name or id. `None` selects every motor whose servo has
+                the instruction (the Feetech STS); a motor named here must have it.
+            num_retry (`int`, *optional*, defaults to `0`):
+                Additional attempts on each motor after a communication failure.
+
+        Returns:
+            `list[str]`: The motors reset, in the order given, or of the bus.
+
+        Raises:
+            ValueError: If a selected motor's servo has no such instruction; nothing is sent
+                then.
+            RuntimeError: If a selected motor has its torque on; nothing is sent then.
+            ConnectionError: If a motor does not answer or refuses the instruction; the
+                message names them. The other motors have been tried.
+        """
+        if motors is None:
+            names = [motor for motor in self.motors if self._definition(motor).supports_turn_count_reset]
+        else:
+            names = self._get_motors_list(motors)
+            if without := [m for m in names if not self._definition(m).supports_turn_count_reset]:
+                raise ValueError(f"Motors {without} have no instruction that resets their turn count.")
+        if not names:
+            return []
+
+        torques = self.sync_read("Torque_Enable", names, normalize=False, num_retry=num_retry)
+        if on := [motor for motor, torque in torques.items() if torque]:
+            raise RuntimeError(f"Cannot reset the turn count of {on}: their torque is on. Disable it first.")
+
+        ids = [self._get_motor_id(motor) for motor in names]
+        failed = self._connected_bus.reset_turn_count(ids, retries=num_retry)
+        if failed:
+            details = ", ".join(
+                f"'{self._id_to_name(id_)}' (motor ID {id_}): {error}" for id_, error in failed.items()
+            )
+            raise ConnectionError(f"Failed to reset the turn count after {num_retry + 1} tries on {details}.")
+        return names
+
+    @check_if_not_connected
     def set_baudrate(self, baudrate: int) -> None:
         """Change the baud rate of the open port.
 
@@ -795,7 +848,12 @@ class SerialMotorsBus(MotorsBusBase):
         The position limits are written to every motor, and the homing offset to the motors
         that have one. Neither the id nor the drive mode is written: a Feetech's drive mode is
         applied in software when normalising, and a Dynamixel's `Drive_Mode` register is set on
-        its own. Each motor is read back before the next one is written.
+        its own. Each motor is read back before the next one is written. Once every motor is
+        verified, the turn count of the Feetech STS motors among them is zeroed, see
+        [`~SerialMotorsBus.reset_turn_count`]: a joint moved by hand through its encoder's
+        zero during the calibration would otherwise drive a whole turn at its first goal.
+        Write it with the torque off.
+
         Args:
             calibration_dict (`dict[str, MotorCalibration]`):
                 Calibration of each motor, by name, as [`~SerialMotorsBus.read_calibration`]
@@ -803,6 +861,12 @@ class SerialMotorsBus(MotorsBusBase):
             cache (`bool`, *optional*, defaults to `True`):
                 Whether to keep the calibration as the bus' `calibration`, which normalises the
                 positions.
+
+        Raises:
+            RuntimeError: If a motor reads back other values than written, or a Feetech STS
+                motor has its torque on when its turn count is to be zeroed.
+            ConnectionError: If a motor does not answer a write, a read or the turn count
+                reset. The calibration is not cached then.
         """
         for motor, calibration in calibration_dict.items():
             expected = self._calibration_register_values(motor, calibration)
@@ -840,6 +904,12 @@ class SerialMotorsBus(MotorsBusBase):
 
             if mismatches:
                 raise RuntimeError(f"Calibration verification failed for motor '{motor}': {mismatches}")
+
+        # A Feetech STS counts the turns a joint was moved through by hand during the
+        # calibration: zero it, or the first goal drives the joint a whole turn.
+        self.reset_turn_count(
+            [motor for motor in calibration_dict if self._definition(motor).supports_turn_count_reset]
+        )
 
         if cache:
             self.calibration = calibration_dict
