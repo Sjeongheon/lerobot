@@ -82,6 +82,22 @@ Goal, RESET or calibration file. They do not exercise the LeRobot CLI or rustypo
 | B01 | timed out | `bus-calibration-check-1` | Waiting for the middle pose; restoration checked. |
 | B02 | done | `bus-calibration-check-2` | Through `SerialMotorsBus` and the rustypot branch: 6143 multi-turn after homing, 731 / 731 after `write_calibration()`, registers as written, torque off; 868 / 868 after the original calibration is written back. |
 
+### The workaround: an Operating_Mode round-trip (2026-11-12)
+
+A comment on the issue suggested that switching the servo to velocity mode and back might
+clear the count, since the fault had cleared on that arm without a power cycle. The
+reimplementation agrees (`encoder_read()` re-initialises the tracker on the first read back in
+position mode), and these runs check it on the motor. Torque off throughout; no Goal, no RESET.
+
+| ID | Status | Record | Summary |
+|---|---|---|---|
+| W00 | refused | `mode-roundtrip-bridge-refused.log` | The serial bridge rejected the first write (Lock 0); nothing was written to the motor. Not evidence. |
+| W01 | done | `mode-roundtrip-1` | Lock 0 throughout. 868 / 868 at the original Home; Home 0, joint moved by hand up through the wrap (4871); Home back: 2548 normal / 6644 multi-turn; `Operating_Mode` 1, about 0.5 s, `Operating_Mode` 0: 2548 / 2548. Registers as before. |
+| W02 | done | `mode-roundtrip-2` | Same with Lock 1 written before the two mode writes and Lock 0 after, so nothing is saved to EEPROM; crossing downward (-902): 870 normal / -3226 multi-turn; after the round-trip 870 / 870. Registers as before. |
+
+While the servo is in velocity mode, `Present_Position` reads the raw angle (776 in W01, which is
+2548 - 1772; 3194 in W02): neither the homing offset nor the turn is applied in that mode.
+
 ### Range attempts, excluded from the evidence
 
 | ID | Status | Record | Summary |
@@ -107,6 +123,8 @@ checked.
 4. The count is not the Phase bit and not EEPROM: P01, P03.
 5. RESET clears it and keeps the registers: T01, R01; and through the bus after
    `write_calibration()`: B02.
+6. An `Operating_Mode` round-trip (position, velocity, position) clears it the same way,
+   with or without the EEPROM lock: W01, W02.
 
 ## Limits
 

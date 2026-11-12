@@ -1,0 +1,194 @@
+{
+  "port": "COM21",
+  "stages": [
+    {
+      "time_ns": 1794447382693881600,
+      "stage": "awaiting_manual_move",
+      "phase": 28,
+      "lock": 0,
+      "torque": 0,
+      "home": 0,
+      "minimum": 867,
+      "maximum": 3261,
+      "goal": 0,
+      "present": 3192,
+      "private67": 3192,
+      "private71": 0,
+      "raw_hex": "030a000903020000016303bd0c465028e8031c2c2f20200010000101f4010100000014c8500ac8c80000000000000000e803000000000000780c000000003419000000780c000000000000000000ffff01143201443201",
+      "mode": 0
+    },
+    {
+      "time_ns": 1794447454799781600,
+      "stage": "manual_motion_complete_home_zero",
+      "phase": 28,
+      "lock": 0,
+      "torque": 0,
+      "home": 0,
+      "minimum": 867,
+      "maximum": 3261,
+      "goal": 0,
+      "present": 4871,
+      "private67": 4871,
+      "private71": 0,
+      "raw_hex": "030a000903020000016303bd0c465028e8031c2c2f20200010000101f4010100000014c8500ac8c80000000000000000e80300000000000007130000000034190000000713000000000000000000ffff01143201443201",
+      "mode": 0
+    },
+    {
+      "time_ns": 1794447455432905400,
+      "stage": "awaiting_command",
+      "phase": 28,
+      "lock": 0,
+      "torque": 0,
+      "home": -1772,
+      "minimum": 867,
+      "maximum": 3261,
+      "goal": 0,
+      "present": 6644,
+      "private67": 6644,
+      "private71": 0,
+      "raw_hex": "030a000903020000016303bd0c465028e8031c2c2f20200010000101f40101ec0e0014c8500ac8c80000000000000000e803000000000000f419000000003419000000f419000000000000000000ffff01143201443201",
+      "mode": 0
+    },
+    {
+      "time_ns": 1794447463526597400,
+      "stage": "awaiting_command",
+      "phase": 28,
+      "lock": 0,
+      "torque": 0,
+      "home": -1772,
+      "minimum": 867,
+      "maximum": 3261,
+      "goal": 0,
+      "present": 2548,
+      "private67": 2548,
+      "private71": 0,
+      "raw_hex": "030a000903020000016303bd0c465028e8031c2c2f20200010000101f40101ec0e0014c8500ac8c80000000000000000e803000000000000f409000000003419000000f409000000000000000000ffff01143201443201",
+      "mode": 0
+    }
+  ],
+  "pairs": {
+    "original_home": {
+      "normal": 868,
+      "extended": 868,
+      "difference": 0,
+      "home": -1772,
+      "mode": 0,
+      "phase": 28
+    },
+    "original_home_restored": {
+      "normal": 2548,
+      "extended": 6644,
+      "difference": 4096,
+      "home": -1772,
+      "mode": 0,
+      "phase": 28
+    },
+    "roundtrip1_before": {
+      "normal": 2548,
+      "extended": 6644,
+      "difference": 4096,
+      "home": -1772,
+      "mode": 0,
+      "phase": 28
+    },
+    "roundtrip1_after": {
+      "normal": 2548,
+      "extended": 2548,
+      "difference": 0,
+      "home": -1772,
+      "mode": 0,
+      "phase": 28
+    }
+  },
+  "roundtrips": [
+    {
+      "index": 1,
+      "before": {
+        "normal": 2548,
+        "extended": 6644,
+        "difference": 4096,
+        "home": -1772,
+        "mode": 0,
+        "phase": 28
+      },
+      "after": {
+        "normal": 2548,
+        "extended": 2548,
+        "difference": 0,
+        "home": -1772,
+        "mode": 0,
+        "phase": 28
+      },
+      "velocity_mode_ms": 482.4716,
+      "in_velocity_mode": [
+        {
+          "present": 776,
+          "mode": 1,
+          "torque": 0,
+          "goal": 0
+        },
+        {
+          "present": 776,
+          "mode": 1,
+          "torque": 0,
+          "goal": 0
+        },
+        {
+          "present": 776,
+          "mode": 1,
+          "torque": 0,
+          "goal": 0
+        }
+      ],
+      "cleared": true
+    }
+  ],
+  "reset_sent": false,
+  "torque_before": {
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0,
+    "6": 0
+  },
+  "before": {
+    "phase": 12,
+    "lock": 0,
+    "torque": 0,
+    "home": -1772,
+    "minimum": 867,
+    "maximum": 3261,
+    "goal": 0,
+    "present": 868,
+    "private67": 868,
+    "private71": 0,
+    "raw_hex": "030a000903020000016303bd0c465028e8030c2c2f20200010000101f40101ec0e0014c8500ac8c80000000000000000e80300000000000064030000000034190000006403000000000000000000ffff01143201443201",
+    "mode": 0
+  },
+  "stage": "finished",
+  "after": {
+    "phase": 12,
+    "lock": 0,
+    "torque": 0,
+    "home": -1772,
+    "minimum": 867,
+    "maximum": 3261,
+    "goal": 0,
+    "present": 2548,
+    "private67": 2548,
+    "private71": 0,
+    "raw_hex": "030a000903020000016303bd0c465028e8030c2c2f20200010000101f40101ec0e0014c8500ac8c80000000000000000e803000000000000f409000000003419000000f409000000000000000000ffff01143201443201",
+    "mode": 0
+  },
+  "preserved_registers": true,
+  "torque_after": {
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0,
+    "6": 0
+  },
+  "cleanup_errors": []
+}

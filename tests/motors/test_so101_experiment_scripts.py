@@ -32,6 +32,7 @@ SCRIPTS = (
     "so101_phase12_crossing_experiment",
     "so101_power_cycle_experiment",
     "so101_bus_calibration_check",
+    "so101_mode_roundtrip_experiment",
 )
 sys.path.insert(0, str(EXAMPLES))
 MODULES = {name: importlib.import_module(name) for name in SCRIPTS}
@@ -59,6 +60,7 @@ class Registers:
         self.previous = position
         self.writes: list[tuple[int, int, bytes]] = []
         self.resets = 0
+        self.mode_roundtrips = 0
         self.raw_reads = 0
         self.closed = False
         self.hook: Any = None
@@ -124,6 +126,9 @@ class Registers:
             assert self.data[motor][40] == 0, "Configuration while powered"
         if address in (9, 11, 18, 31) and self.data[motor][55]:
             raise RuntimeError("EEPROM is locked")
+        if address == 33 and self.data[motor][33] == 1 and value == b"\x00":
+            self.mode_roundtrips += 1  # W01/W02: back in position mode the tracker restarts at zero turns
+            self.turns = 0
         self.data[motor][address : address + len(value)] = value
         if address == 42:
             self.data[motor][40] = 1  # exercise the observed Goal-write side effect
@@ -196,6 +201,8 @@ class Operator:
                 action = "restore_home"
         elif stage in ("awaiting_reset_comparison", "awaiting_cleanup"):
             action = "finish" if self.mode in ("phase12", "power") else "reset"
+        elif stage == "awaiting_command":
+            action = "roundtrip" if n == 1 else "finish"
         elif stage == "awaiting_middle":
             self.registers.move_to(300)
             action = "middle"
@@ -212,7 +219,8 @@ class Operator:
             action = "power_cycled"
         if action and not (self.output / "command.json").exists():
             (self.output / "command.json").write_text(json.dumps({"command": action}), encoding="utf-8")
-            self.completed.add(stage)
+            if stage != "awaiting_command" or action == "finish":
+                self.completed.add(stage)
 
 
 class FakeNativeBus(MockBus):
@@ -335,6 +343,26 @@ def test_manual_home_reset_and_restore(harness):
     assert all(p.closed for p in ports)
 
 
+@pytest.mark.parametrize("lock_during_switch", [False, True])
+def test_mode_roundtrip_clears_turn_without_reset(harness, lock_during_switch):
+    regs, ports, run, _ = harness
+    regs.move_to(900)
+    extra = ["--lock-during-switch"] if lock_during_switch else []
+    result = run("so101_mode_roundtrip_experiment", extra, mode="roundtrip")
+    (roundtrip,) = result["roundtrips"]
+    assert roundtrip["before"]["difference"] == 4096 and roundtrip["after"]["difference"] == 0
+    assert roundtrip["cleared"] and regs.mode_roundtrips == 1 and regs.resets == 0
+    mode_writes = [(address, value) for _, address, value in regs.writes if address in (33, 55)]
+    if lock_during_switch:
+        expected = [(55, b"\x00"), (55, b"\x01"), (33, b"\x01"), (33, b"\x00"), (55, b"\x00"), (55, b"\x01")]
+    else:
+        expected = [(55, b"\x00"), (33, b"\x01"), (33, b"\x00"), (55, b"\x01")]
+    assert mode_writes == expected
+    assert result["preserved_registers"] and not result["cleanup_errors"]
+    assert not any(address in (40, 42) for _, address, _ in regs.writes)
+    assert all(p.closed for p in ports)
+
+
 def test_phase12_crossing_is_observed_without_powering(harness):
     regs, ports, run, _ = harness
     regs.move_to(900)
@@ -444,7 +472,7 @@ def test_bus_calibration_result_and_restoration(harness, monkeypatch, clears, ex
     assert regs.data[2][18] == 12 and regs.data[2][55] == 1
 
 
-@pytest.mark.parametrize("name", ["so101_phase_probe", "so101_manual_turn_experiment", "so101_phase12_crossing_experiment", "so101_power_cycle_experiment"])
+@pytest.mark.parametrize("name", ["so101_phase_probe", "so101_manual_turn_experiment", "so101_phase12_crossing_experiment", "so101_power_cycle_experiment", "so101_mode_roundtrip_experiment"])
 def test_nonzero_preflight_torque_sends_no_configuration(harness, name):
     regs, ports, run, _ = harness
     regs.data[3][40] = 1
@@ -553,7 +581,7 @@ def test_power_cycle_does_not_claim_success_without_valid_observation(harness, c
     assert all(p.closed for p in ports)
 
 
-@pytest.mark.parametrize("name", ["so101_manual_turn_experiment", "so101_phase12_crossing_experiment"])
+@pytest.mark.parametrize("name", ["so101_manual_turn_experiment", "so101_phase12_crossing_experiment", "so101_mode_roundtrip_experiment"])
 def test_manual_wait_timeout_restores_configuration(harness, name):
     regs, ports, run, clock = harness
     regs.move_to(900)
