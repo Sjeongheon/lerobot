@@ -224,17 +224,22 @@ class Operator:
 
 
 class FakeNativeBus(MockBus):
-    """Actual Python bus methods over register fixtures, with no rustypot I/O."""
+    """Actual Python bus methods over register fixtures, with no rustypot I/O.
+
+    With clears_turns False neither RESET nor an Operating_Mode round-trip zeroes the fixture's
+    turn count, so the check script sees a motor that keeps it whichever form the fix takes.
+    """
 
     addresses = {
         "homing_offset": (31, 2), "min_position_limit": (9, 2), "max_position_limit": (11, 2),
-        "phase": (18, 1), "lock": (55, 1), "torque_enable": (40, 1), "present_position": (56, 2),
+        "phase": (18, 1), "operating_mode": (33, 1), "lock": (55, 1), "torque_enable": (40, 1),
+        "present_position": (56, 2),
     }
 
-    def __init__(self, motors, registers: Registers, clear_on_reset: bool = True):
+    def __init__(self, motors, registers: Registers, clears_turns: bool = True):
         super().__init__(motors=motors)
         self.fixture = registers
-        self.clear_on_reset = clear_on_reset
+        self.clears_turns = clears_turns
         for motor in range(1, 7):
             self.seed(motor, "model_number", 777)
             self.seed(motor, "firmware_major_version", 3)
@@ -256,7 +261,10 @@ class FakeNativeBus(MockBus):
         if register in self.addresses:
             address, count = self.addresses[register]
             encoded = abs(value) | (2048 if value < 0 else 0) if register == "homing_offset" else value
+            turns = self.fixture.turns
             self.fixture.write(motor_id, 3, bytes([address]) + encoded.to_bytes(count, "little"))
+            if register == "operating_mode" and not self.clears_turns:
+                self.fixture.turns = turns
         return status
 
     def set_torque(self, motor_ids, enabled: bool, retries: int = 0):
@@ -268,7 +276,7 @@ class FakeNativeBus(MockBus):
 
     def reset_turn_count(self, motor_ids, retries: int = 0):
         failed = super().reset_turn_count(motor_ids, retries)
-        if 2 in motor_ids and 2 not in failed and self.clear_on_reset:
+        if 2 in motor_ids and 2 not in failed and self.clears_turns:
             self.fixture.turns = 0
         return failed
 

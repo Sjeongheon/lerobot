@@ -1,0 +1,171 @@
+{
+  "port": "COM21",
+  "joint": "shoulder_lift",
+  "stages": [
+    {
+      "time_ns": 1794457010979279100,
+      "stage": "before",
+      "torque": 0,
+      "phase": 12,
+      "lock": 0,
+      "home": -1772,
+      "minimum": 867,
+      "maximum": 3261,
+      "present": 870
+    },
+    {
+      "time_ns": 1794457011319174400,
+      "stage": "extended_before",
+      "torque": 0,
+      "phase": 28,
+      "lock": 0,
+      "home": -1772,
+      "minimum": 867,
+      "maximum": 3261,
+      "present": 870
+    },
+    {
+      "time_ns": 1794457011753207800,
+      "stage": "home_zero",
+      "torque": 0,
+      "phase": 12,
+      "lock": 0,
+      "home": 0,
+      "minimum": 0,
+      "maximum": 4095,
+      "present": 3194
+    },
+    {
+      "time_ns": 1794457011987578300,
+      "stage": "awaiting_middle",
+      "torque": 0,
+      "phase": 12,
+      "lock": 0,
+      "home": 0,
+      "minimum": 0,
+      "maximum": 4095,
+      "present": 3194
+    },
+    {
+      "time_ns": 1794457078157171600,
+      "stage": "extended_after_homing",
+      "torque": 0,
+      "phase": 28,
+      "lock": 0,
+      "home": -1752,
+      "minimum": 0,
+      "maximum": 4095,
+      "present": 6143
+    },
+    {
+      "time_ns": 1794457078407100300,
+      "stage": "awaiting_sweep",
+      "torque": 0,
+      "phase": 12,
+      "lock": 0,
+      "home": -1752,
+      "minimum": 0,
+      "maximum": 4095,
+      "present": 2047
+    },
+    {
+      "time_ns": 1794457121710235200,
+      "stage": "after_write_calibration",
+      "torque": 0,
+      "phase": 12,
+      "lock": 0,
+      "home": -1752,
+      "minimum": 848,
+      "maximum": 3234,
+      "present": 851
+    },
+    {
+      "time_ns": 1794457122005098500,
+      "stage": "extended_after_write_calibration",
+      "torque": 0,
+      "phase": 28,
+      "lock": 0,
+      "home": -1752,
+      "minimum": 848,
+      "maximum": 3234,
+      "present": 851
+    },
+    {
+      "time_ns": 1794457123044270200,
+      "stage": "restored",
+      "torque": 0,
+      "phase": 12,
+      "lock": 0,
+      "home": -1772,
+      "minimum": 867,
+      "maximum": 3261,
+      "present": 871
+    },
+    {
+      "time_ns": 1794457123427144400,
+      "stage": "extended_restored",
+      "torque": 0,
+      "phase": 28,
+      "lock": 0,
+      "home": -1772,
+      "minimum": 867,
+      "maximum": 3261,
+      "present": 871
+    }
+  ],
+  "torque_before": {
+    "shoulder_pan": 0,
+    "shoulder_lift": 0,
+    "elbow_flex": 0,
+    "wrist_flex": 0,
+    "wrist_roll": 0,
+    "gripper": 0
+  },
+  "original_calibration": {
+    "id": 2,
+    "drive_mode": 0,
+    "homing_offset": -1772,
+    "range_min": 867,
+    "range_max": 3261
+  },
+  "stage": "finished",
+  "extended_before": 870,
+  "homing_offset": -1752,
+  "extended_after_homing": 6143,
+  "recorded_calibration": {
+    "id": 2,
+    "drive_mode": 0,
+    "homing_offset": -1752,
+    "range_min": 848,
+    "range_max": 3234
+  },
+  "extended_after_write_calibration": 851,
+  "verdict": {
+    "display_after": 851,
+    "extended_after": 851,
+    "turn_count_zero_after_write_calibration": true,
+    "registers_as_written": true
+  },
+  "expected_turn_state": "cleared",
+  "restored": {
+    "time_ns": 1794457123044270200,
+    "stage": "restored",
+    "torque": 0,
+    "phase": 12,
+    "lock": 0,
+    "home": -1772,
+    "minimum": 867,
+    "maximum": 3261,
+    "present": 871
+  },
+  "extended_restored": 871,
+  "torque_after": {
+    "shoulder_pan": 0,
+    "shoulder_lift": 0,
+    "elbow_flex": 0,
+    "wrist_flex": 0,
+    "wrist_roll": 0,
+    "gripper": 0
+  },
+  "cleanup_errors": []
+}
