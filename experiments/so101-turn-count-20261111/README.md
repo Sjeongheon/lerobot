@@ -73,6 +73,7 @@ Goal, RESET or calibration file. They do not exercise the LeRobot CLI or rustypo
 | P01 | `phase12-crossing` | Same crossing with Phase 12 (bit 4 clear) during the move: one 4080 to 21 wrap seen; 2500 normal / 6596 multi-turn after the original Home is written back. The count does not depend on the bit. |
 | P02 | `power-cycle` | 12 V cut only: 17 unanswered reads during the cut; 6596 before, 2500 after, Phase still 28. The count is in RAM. |
 | P03 | `power-on-parked` | 2026-11-16, for a question raised on the PR: no retained turn, the joint parked past the raw encoder zero (reported 905, raw 3229, Home -1772), 12 V cut and restored with Phase 28 kept so the first read after power-up is the multi-turn one: 905 before, 906 after, turn 0 both times, 7 unanswered reads during the cut. Power-on does not start a count from where the joint stands. |
+| P04 | `power-on-homing-side` | The other side, same day: joint on the homing side of the raw zero (reported 2207, raw 435), same procedure: 2207 before and after, turn 0, 8 unanswered reads during the cut. |
 
 ### The fix on the real bus
 
@@ -105,7 +106,7 @@ While the servo is in velocity mode, `Present_Position` reads the raw angle (776
 2. It survives the calibration core, with every register as written: C02 against C01.
 3. A goal four ticks away drives the motor a turn: H02 against H01 and H03.
 4. The count is not the Phase bit and not EEPROM: P01, P02. Power-on with the joint past the
-   raw zero does not create one: P03.
+   raw zero does not create one, nor on the homing side: P03, P04.
 5. RESET clears it and keeps the registers: T01, R01; and through the bus after
    `write_calibration()`: B01.
 6. An `Operating_Mode` round-trip (position, velocity, position) clears it the same way,
